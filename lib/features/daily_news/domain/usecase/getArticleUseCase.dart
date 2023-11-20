@@ -5,6 +5,7 @@ import 'package:news_app/features/daily_news/domain/repository/article_repositor
 
 class GetArticleUseCase implements UseCase<Resource<List<ArticleEntity>>, void> {
   final ArticleRepository articleRepository;
+
   GetArticleUseCase(this.articleRepository);
 
   @override

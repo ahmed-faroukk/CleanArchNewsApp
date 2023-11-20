@@ -10,11 +10,12 @@ class RemoteArticleBloc extends Bloc<RemoteArticleEvents , RemoteArticleState>{
   final GetArticleUseCase getArticleUseCase ;
   
   RemoteArticleBloc(this.getArticleUseCase) : super(const RemoteArticleLoading()) {
-    on<GetArticles> (onGetArticle) ;
+    on <GetArticles> (onGetArticle) ;
   }
 
   void onGetArticle(GetArticles event , Emitter<RemoteArticleState> emit) async {
     final dataState = await getArticleUseCase.invoke() ;
+
     if(dataState is Success && dataState.data!.isNotEmpty){
       emit(
         RemoteArticleDone(dataState.data!)
