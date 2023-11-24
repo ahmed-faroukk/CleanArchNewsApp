@@ -2,24 +2,24 @@ import 'package:equatable/equatable.dart';
 
 class ArticleEntity extends Equatable{
 
-  final int ? id;
-  final String ? author;
-  final String ? title;
-  final String ? description;
-  final String ? url;
-  final String ? urlToImage;
-  final String ? publishedAt;
-  final String ? content;
+  final int  id;
+  final String  author;
+  final String  title;
+  final String  description;
+  final String  url;
+  final String  urlToImage;
+  final String  publishedAt;
+  final String  content;
 
   const ArticleEntity({
-    this.id,
-    this.author,
-    this.title,
-    this.description,
-    this.url,
-    this.urlToImage,
-    this.publishedAt,
-    this.content,
+    required this.id,
+    required this.author,
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.urlToImage,
+    required this.publishedAt,
+    required this.content,
   });
 
 

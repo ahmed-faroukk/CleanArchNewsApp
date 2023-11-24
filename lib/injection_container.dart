@@ -1,4 +1,6 @@
 
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/features/daily_news/data/data_sources/remote/api_service.dart';
 import 'package:dio/dio.dart';
@@ -6,6 +8,8 @@ import 'package:news_app/features/daily_news/data/repository/articleRepoImp.dart
 import 'package:news_app/features/daily_news/domain/repository/article_repository.dart';
 import 'package:news_app/features/daily_news/domain/usecase/getArticleUseCase.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+
+import 'config/controller/NetworkController.dart';
 
 final s1 = GetIt.instance ;
 
@@ -27,5 +31,13 @@ Future<void> initializeDependencies() async {
 
 
 
+
+}
+
+class ControllerInit  {
+
+  static void init() {
+    Get.put<NetworkController>(NetworkController(),permanent:true);
+  }
 
 }

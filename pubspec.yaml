@@ -50,9 +50,20 @@ dependencies:
   retrofit: ^3.0.1
   #Hooks
   flutter_hooks: ^0.18.3
-
+  #google navbar
+  google_nav_bar: ^5.0.6
   #chached image
   cached_network_image: ^3.2.0
+  #check network
+  connectivity_plus: ^5.0.2
+  get: ^4.6.6
+  #webView
+  webview_flutter: ^2.0.10
+  #floor db
+
+
+
+
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:news_app/core/Constansts/Constants.dart';
@@ -26,8 +27,13 @@ class ArticleRepositoryImpl implements ArticleRepository {
 
     try {
       if (response.response.statusCode == HttpStatus.ok) {
+        // Successful response
+        print('Server Response:');
+        print(response.response);
         return Success(response.data);
       } else {
+        print('Server Response:');
+        print(response.response);
         return Error(DioError(error: response.response.statusMessage,
             response: response.response,
             type: DioErrorType.response,
