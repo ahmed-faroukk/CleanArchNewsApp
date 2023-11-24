@@ -45,7 +45,7 @@ dependencies:
   #dateFormat
   intl: ^0.18.1
   #Database
-  floor: any
+  floor: ^1.4.2
   #make request to api
   retrofit: ^3.0.1
   #Hooks
