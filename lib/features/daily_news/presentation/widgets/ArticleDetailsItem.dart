@@ -1,33 +1,59 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:news_app/features/daily_news/presentation/widgets/LoveBtn.dart';
 
+import '../../../../injection_container.dart';
 import '../../domain/entities/article.dart';
+import '../bloc/article/local/Local_article_bloc.dart';
+import '../bloc/article/local/Local_article_event.dart';
 
-class ArticleDetailWidget extends StatelessWidget {
+class ArticleDetailWidget extends StatefulWidget {
   final ArticleEntity article;
 
-  const ArticleDetailWidget({
-    Key? key,
+  const ArticleDetailWidget({super.key,  required this.article});
+
+  @override
+  State createState() => _ArticleDetailWidget(article: article);
+}
+
+class _ArticleDetailWidget extends State<ArticleDetailWidget> {
+  final ArticleEntity article;
+
+   _ArticleDetailWidget({
     required this.article,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    bool isLoved  = false ;
+    return _buildBody(context);
+  }
+
+ Widget _buildBody(BuildContext context){
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: Padding(
         padding: const EdgeInsets.only(top: 15),
         child: SingleChildScrollView(
           child: Column(
             children: [
               buildArticleHeaderStack(context),
-              _buildArticleDescription()
+              _buildArticleDescription(),
+              LoveButton(onClick:() {
+                _onLoveButtonPressed(context , article , "");
+              })
             ],
           ),
         ),
       ),
     );
   }
+
+
+
 
   Widget buildArticleHeaderStack(BuildContext context) {
     return Stack(
@@ -48,30 +74,33 @@ class ArticleDetailWidget extends StatelessWidget {
             ],
           ),
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: buildImage(context)),
+            borderRadius: BorderRadius.circular(12),
+            child: buildImage(context),
+          ),
         ),
         // Title
         Positioned(
           bottom: 0,
-          child: Flexible(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              height: 400,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [Colors.black, Colors.transparent],
-                ),
-                borderRadius: BorderRadius.circular(12),
+          child: Container(
+            height: 400,
+            width: MediaQuery.of(context).size.width, // Use the screen width
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [Colors.black, Colors.transparent],
               ),
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: Container(
-                    alignment: Alignment.bottomLeft,
-                    child: _buildArticleTitle()),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 20, left: 20), // Adjust the padding as needed
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildArticleTitle(),
+                  // You can add other widgets here like the article subtitle or date
+                ],
               ),
             ),
           ),
@@ -80,11 +109,12 @@ class ArticleDetailWidget extends StatelessWidget {
     );
   }
 
+
   Widget _buildArticleDescription() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 50),
       child: Text(
-        '${article.title ?? ''}\n\n${article.description ?? ''}\n\n${article.content ?? ''}',
+        '${article.title}\n\n${article.description}\n\n${article.content}',
         style: const TextStyle(fontSize: 15),
       ),
     );
@@ -163,4 +193,26 @@ class ArticleDetailWidget extends StatelessWidget {
               ),
             ));
   }
+
+   _onLoveButtonPressed(BuildContext context , ArticleEntity article , String sankMsg) {
+    BlocProvider.of<LocalArticleBloc>(context).add(SaveArticleEvent(article));
+    ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+        backgroundColor: Colors.black,
+        content: Text('Article saved successfully \n $sankMsg'),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+
+  }
+  void showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2), // Adjust the duration as needed
+      ),
+    );
+  }
+
+
 }

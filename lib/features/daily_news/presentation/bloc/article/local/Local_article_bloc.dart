@@ -23,6 +23,7 @@ class LocalArticleBloc extends Bloc<LocalArticleEvents, LocalArticleState> {
       GetSavedArticlesEvent event, Emitter<LocalArticleState> emit) async {
     final articles = await _getSavedArticleUseCase.invoke();
     emit(LocalArticleDone(articles));
+    print(LocalArticleDone(articles));
   }
 
   void onRemoveArticle(

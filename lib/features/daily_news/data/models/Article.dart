@@ -1,10 +1,15 @@
 import 'package:floor/floor.dart';
 import 'package:news_app/features/daily_news/domain/entities/article.dart';
 
+import '../../../../core/Constansts/Constants.dart';
+
 @Entity(tableName: 'article' , primaryKeys: ['id'])
 class ArticleModel extends ArticleEntity {
+  @PrimaryKey(autoGenerate: true)
+  final int? id;
+
   const ArticleModel({
-    required int  id,
+     this.id,
     required String author,
     required String title,
     required String description,
@@ -13,6 +18,7 @@ class ArticleModel extends ArticleEntity {
     required String publishedAt,
     required String content,
   }) : super(
+
             id: id,
             author: author,
             title: title,
@@ -28,10 +34,9 @@ class ArticleModel extends ArticleEntity {
       author: map['author'] ?? "",
       title: map['title'] ?? "",
       description: map['description'] ?? "",
-      url: map['url'] ?? "",
-      urlToImage: map['urlToImage'] ?? "",
-      publishedAt: map['publishedAt'] ?? "",
-      content: map['content'] ?? "", id: 0,
+      url: map['url'] ?? "", urlToImage: map['urlToImage'] != null && map['urlToImage'] != "" ? map['urlToImage'] : kDefaultImage,
+        publishedAt: map['publishedAt'] ?? "",
+      content: map['content'] ?? ""
     );
   }
   factory ArticleModel.fromEntity(ArticleEntity entity) {
