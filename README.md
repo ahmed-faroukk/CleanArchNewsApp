@@ -11,7 +11,7 @@ This app follow clean architecture ,I used Clean Arch with BloC as state managem
 <ul>
   <li>Bloc</li>
   <li>Clean architecture</li>
-  <li>Dependency injection get_it. </li>
+  <li>Dependency injection with get_it. </li>
   <li>floor DB</li>
   <li>Retrofit</li>
   <li>abstraction</li>
