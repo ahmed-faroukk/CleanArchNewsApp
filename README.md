@@ -2,6 +2,11 @@
 
 This app follow clean architecture ,I used Clean Arch with BloC as state management to improve widget rebuilding performance.
 
+# Note 
+The app is developed using the Gitflow workflow, ensuring a systematic and organized approach to version control and feature development
+![1 9yJY7fyscWFUVRqnx0BM6A](https://github.com/ahmed-faroukk/CleanArchNewsApp/assets/72602749/8b94a564-9218-47dd-bdd7-3888088a96df)
+
+
 # Features
 <li> Animated UI </li>
 <li>support light and dark mode</li>
@@ -9,6 +14,7 @@ This app follow clean architecture ,I used Clean Arch with BloC as state managem
 
 # Tools & APIs
 <ul>
+
   <li>Bloc</li>
   <li>Clean architecture</li>
   <li>Dependency injection with get_it. </li>
@@ -46,6 +52,12 @@ This app follow clean architecture ,I used Clean Arch with BloC as state managem
     
   </tr>
 </table>
+# Demo
+
+https://github.com/ahmed-faroukk/CleanArchNewsApp/assets/72602749/73010515-8c45-49d6-83d7-800a4ea23b9b
+
+ 
+
 
 # App Arch 
 # 1 
