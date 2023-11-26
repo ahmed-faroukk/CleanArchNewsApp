@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.white,
+  hintColor: const Color(0xFF542BBA),
+  scaffoldBackgroundColor: Colors.black,
+  textTheme: const TextTheme(
+    bodyText1: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), // Adjust text style as needed
+    bodyText2: TextStyle(color: Colors.black, fontWeight: FontWeight.bold), // Adjust text style as needed
+  ),
+  // other properties...
+);
+Color darkGray = Color(0xFF333333);
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Colors.black,
+  hintColor: const Color(0xFF542BBA),
+  scaffoldBackgroundColor: Colors.black,
+  textTheme: const TextTheme(
+    bodyText1: TextStyle(color: Colors.white, fontWeight: FontWeight.bold), // Adjust text style as needed
+    bodyText2: TextStyle(color: Colors.white, fontWeight: FontWeight.bold), // Adjust text style as needed
+  ),
+  // other properties...
+);
 
-ThemeData theme() {
-  return ThemeData(
-    scaffoldBackgroundColor: Colors.white ,
-    fontFamily: 'Muli',
-    appBarTheme: appBarTheme()
-  );
-}
 AppBarTheme appBarTheme() {
  return const AppBarTheme(
    color: Colors.white ,
