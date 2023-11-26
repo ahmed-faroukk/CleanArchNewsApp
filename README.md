@@ -18,3 +18,7 @@ This app follow clean architecture ,I used Clean Arch with BloC as state managem
   <li>hero animation</li>
   <li>Observing network connection with Connectivity</li>
 </ul>
+
+# App Arch 
+
+![0 zUtZYiJ1bDTugOYY](https://github.com/ahmed-faroukk/CleanArchNewsApp/assets/72602749/54669a12-449c-4af8-8d30-8b407c311eed)
