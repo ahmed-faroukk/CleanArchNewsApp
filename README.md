@@ -15,7 +15,10 @@ This app follow clean architecture ,I used Clean Arch with BloC as state managem
   <li>floor DB</li>
   <li>Retrofit</li>
   <li>abstraction</li>
+  <li>GNav</li>
   <li>hero animation</li>
+  <li>SharedPref</li>
+
   <li>Observing network connection with Connectivity</li>
 </ul>
 
