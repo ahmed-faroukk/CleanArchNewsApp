@@ -167,7 +167,7 @@ class _DailyNews extends State<DailyNews> {
                 text: "Saved",
               ),
               GButton(
-                icon: Icons.web,
+                icon: Icons.settings,
                 text: "Settings ",
               ),
             ],
