@@ -9,7 +9,6 @@ import 'package:news_app/features/daily_news/presentation/widgets/article_tile.d
 
 import '../../../../../injection_container.dart';
 
-
 class SavedNews extends StatefulWidget {
   const SavedNews({super.key});
 
@@ -17,39 +16,40 @@ class SavedNews extends StatefulWidget {
   State<SavedNews> createState() {
     return SavedNewsState();
   }
-
 }
 
 class SavedNewsState extends State<SavedNews> {
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-      s1<LocalArticleBloc>()
-        ..add(const GetSavedArticlesEvent()),
+      create: (_) => s1<LocalArticleBloc>()..add(const GetSavedArticlesEvent()),
       child: Scaffold(
         body: _buildBody(context),
       ),
     );
   }
 
-
   Widget _buildBody(BuildContext context) {
     return BlocBuilder<LocalArticleBloc, LocalArticleState>(
       builder: (context, state) {
         if (state is LocalArticleLoading) {
-          return const Center(child: CupertinoActivityIndicator());
+          return Scaffold(
+            body: const Center(child: CupertinoActivityIndicator()),
+            backgroundColor: Theme.of(context).primaryColor,
+          );
         } else if (state is LocalArticleDone) {
-          return _buildArticlesList(context, state.article);
+          return Scaffold(
+            body: _buildArticlesList(context, state.article),
+            backgroundColor: Theme.of(context).primaryColor,
+          );
         }
         return Container();
       },
     );
   }
 
-  Widget _buildArticlesList(BuildContext context,
-      List<ArticleEntity>? articles) {
+  Widget _buildArticlesList(
+      BuildContext context, List<ArticleEntity>? articles) {
     if (articles == null || articles.isEmpty) {
       return const Center(
         child: Text(
@@ -82,10 +82,23 @@ class SavedNewsState extends State<SavedNews> {
             BlocProvider.of<LocalArticleBloc>(context)
                 .add(DeleteArticleEvent(article));
           },
-          child: ArticleWidget(article: article),
+          child:  Hero(
+            tag: article.url,
+            transitionOnUserGestures: true,
+
+            // Unique tag for each ArticleWidget
+            child: ArticleWidget(
+              article: article,
+              onArticlePressed: (article) =>
+                  _onArticlePressed(context, article),
+            ),
+          ),
         );
       },
     );
   }
-}
 
+  void _onArticlePressed(BuildContext context, ArticleEntity article) {
+    Navigator.pushNamed(context, '/ArticleDetails', arguments: article);
+  }
+}

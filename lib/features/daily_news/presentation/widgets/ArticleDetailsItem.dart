@@ -198,9 +198,9 @@ class _ArticleDetailWidget extends State<ArticleDetailWidget> {
     BlocProvider.of<LocalArticleBloc>(context).add(SaveArticleEvent(article));
     ScaffoldMessenger.of(context).showSnackBar(
        SnackBar(
-        backgroundColor: Colors.black,
-        content: Text('Article saved successfully \n $sankMsg'),
-        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.red,
+        content: Text('Article saved successfully \n $sankMsg' ,style: const TextStyle(color: Colors.white , fontWeight: FontWeight.bold),),
+        duration: const Duration(seconds: 1),
       ),
     );
 

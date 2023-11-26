@@ -59,10 +59,9 @@ dependencies:
   get: ^4.6.6
   #webView
   webview_flutter: ^2.0.10
-  #floor db
-
-
-
+  provider: ^6.1.1
+  shared_preferences: ^2.2.2
+  day_night_switch: ^1.0.4
 
 
 dev_dependencies:

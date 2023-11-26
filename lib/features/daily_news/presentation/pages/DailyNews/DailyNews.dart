@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_state.dart';
+import 'package:news_app/features/daily_news/presentation/pages/Settings/SettingsSceeen.dart';
+import 'package:news_app/features/daily_news/presentation/pages/savedNews/SavedNews.dart';
 
 import '../../../domain/entities/article.dart';
 import '../../widgets/article_tile.dart';
@@ -21,7 +23,13 @@ class DailyNews extends StatefulWidget {
 class _DailyNews extends State<DailyNews> {
   bool _isVisible = true;
   late ScrollController _scrollController;
-
+  int _currentIndex = 0;
+  // Define your pages here
+  final List<Widget> _pages = [
+    const DailyNews(),
+    const SavedNews(),
+    const SettingScreen(),
+  ];
   @override
   void initState() {
     super.initState();
@@ -60,8 +68,7 @@ class _DailyNews extends State<DailyNews> {
       bottomNavigationBar: _bottomNavBar(),
       body: Container(
         color: const Color(0xFFFFA559),
-        child: _buildBody(),
-      ),
+        child: _currentIndex == 0 ? _buildBody() : _pages[_currentIndex],      ),
     );
   }
 
@@ -165,12 +172,9 @@ class _DailyNews extends State<DailyNews> {
               ),
             ],
             onTabChange: (index) {
-              if (index == 1) {
-                _onShowSavedArticlesViewTapped(context);
-              }
-              if (index == 2) {
-                _onSettingsPressed(context);
-              }
+              setState(() {
+                _currentIndex = index;
+              });
             },
           ),
         ));

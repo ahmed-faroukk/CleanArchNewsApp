@@ -12,4 +12,5 @@ abstract class ArticleRepository {
   Future <void> saveArticle(ArticleEntity article);
 
   Future <void> removeArticle(ArticleEntity article);
+
 }
