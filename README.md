@@ -1,16 +1,20 @@
 # news_app
 
-A new Flutter project.
+This app follow clean architecture ,I used Clean Arch with BloC as state management to improve widget rebuilding performance.
 
-## Getting Started
+# Features
+<li> Animated UI </li>
+<li>support light and dark mode</li>
+<li>cashing</li>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Tools & APIs
+<ul>
+  <li>Bloc</li>
+  <li>Clean architecture</li>
+  <li>Dependency injection get_it. </li>
+  <li>floor DB</li>
+  <li>Retrofit</li>
+  <li>abstraction</li>
+  <li>hero animation</li>
+  <li>Observing network connection with Connectivity</li>
+</ul>
