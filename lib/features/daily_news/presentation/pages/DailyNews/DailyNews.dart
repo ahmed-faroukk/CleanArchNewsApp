@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:news_app/features/daily_news/presentation/bloc/article/remote/remote_article_state.dart';
+import 'package:news_app/features/daily_news/presentation/pages/Settings/SettingsSceeen.dart';
+import 'package:news_app/features/daily_news/presentation/pages/savedNews/SavedNews.dart';
 
 import '../../../domain/entities/article.dart';
 import '../../widgets/article_tile.dart';
@@ -21,7 +23,13 @@ class DailyNews extends StatefulWidget {
 class _DailyNews extends State<DailyNews> {
   bool _isVisible = true;
   late ScrollController _scrollController;
-
+  int _currentIndex = 0;
+  // Define your pages here
+  final List<Widget> _pages = [
+    const DailyNews(),
+    const SavedNews(),
+    const SettingScreen(),
+  ];
   @override
   void initState() {
     super.initState();
@@ -56,12 +64,11 @@ class _DailyNews extends State<DailyNews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF542BBA),
+      backgroundColor: const Color(0xFFFFA559),
       bottomNavigationBar: _bottomNavBar(),
       body: Container(
-        color: const Color(0xFF542BBA),
-        child: _buildBody(),
-      ),
+        color: const Color(0xFFFFA559),
+        child: _currentIndex == 0 ? _buildBody() : _pages[_currentIndex],      ),
     );
   }
 
@@ -84,24 +91,23 @@ class _DailyNews extends State<DailyNews> {
   }
 
   newsList(RemoteArticleState state) {
-
     return CustomScrollView(
       controller: _scrollController,
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
           pinned: true,
           elevation: 10,
           expandedHeight: 150.0,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).primaryColor,
           flexibleSpace: FlexibleSpaceBar(
             title: Text("Breaking News",
-                style: TextStyle(
-                    color: Colors.black, fontWeight: FontWeight.bold)),
+                style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-                (context, index) {
+            (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
@@ -112,7 +118,7 @@ class _DailyNews extends State<DailyNews> {
                     Material(
                       child: Hero(
                         tag: state.article![index].url,
-                        transitionOnUserGestures: true ,
+                        transitionOnUserGestures: true,
 
                         // Unique tag for each ArticleWidget
                         child: ArticleWidget(
@@ -120,7 +126,6 @@ class _DailyNews extends State<DailyNews> {
                           onArticlePressed: (article) =>
                               _onArticlePressed(context, article),
                         ),
-
                       ),
                     ),
                   ],
@@ -133,24 +138,22 @@ class _DailyNews extends State<DailyNews> {
       ],
     );
   }
-  _bottomNavBar(){
+
+  _bottomNavBar() {
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 500),
           height: _isVisible ? kBottomNavigationBarHeight : 0.0,
           child: GNav(
-            backgroundColor: Colors.white,
-            activeColor: Colors.white,
-            tabBackgroundColor: const Color(0XFF876bcf),
+            backgroundColor: Theme.of(context).primaryColor,
+            activeColor: Colors.black,
+            tabBackgroundColor: const Color(0x99FFA559),
             tabBorderRadius: 20,
             curve: Curves.fastOutSlowIn,
             // tab animation curves
             haptic: true,
             // haptic feedback
-            tabShadow: [
-              BoxShadow(color: Colors.white.withOpacity(0.2), blurRadius: 8)
-            ],
             // tab button shadow
             gap: 15,
             padding: const EdgeInsets.all(16),
@@ -165,13 +168,13 @@ class _DailyNews extends State<DailyNews> {
               ),
               GButton(
                 icon: Icons.web,
-                text: "Detail ",
+                text: "Settings ",
               ),
             ],
             onTabChange: (index) {
-              if (index == 1) {
-                _onShowSavedArticlesViewTapped(context);
-              }
+              setState(() {
+                _currentIndex = index;
+              });
             },
           ),
         ));
@@ -179,6 +182,10 @@ class _DailyNews extends State<DailyNews> {
 
   void _onArticlePressed(BuildContext context, ArticleEntity article) {
     Navigator.pushNamed(context, '/ArticleDetails', arguments: article);
+  }
+
+  void _onSettingsPressed(BuildContext context) {
+    Navigator.pushNamed(context, '/Settings');
   }
 
   void _onShowSavedArticlesViewTapped(BuildContext context) {

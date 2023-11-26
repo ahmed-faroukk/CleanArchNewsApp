@@ -6,6 +6,7 @@ import 'package:news_app/features/daily_news/presentation/widgets/ArticleDetails
 import 'package:news_app/injection_container.dart';
 
 import '../../../domain/entities/article.dart';
+import '../../bloc/article/local/Local_article_bloc.dart';
 
 class ArticleDetails extends HookWidget {
   final ArticleEntity? article;
@@ -14,11 +15,18 @@ class ArticleDetails extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Hero(tag: article!.url
-          ,transitionOnUserGestures: true ,
-        child: Center(child: ArticleDetailWidget(article: article!)),
-      )
+    return BlocProvider(
+        create: (_) => s1<LocalArticleBloc>(),
+        child: _buildBody(article)
     );
   }
+}
+
+_buildBody(ArticleEntity ? article ){
+  return  Scaffold(
+      body: Hero(tag: article!.url
+        ,transitionOnUserGestures: true ,
+        child: Center(child: ArticleDetailWidget(article: article!)),
+      )
+  );
 }

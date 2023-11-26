@@ -28,7 +28,7 @@ class ArticleWidget extends StatelessWidget {
           onTap: onTab ,
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).primaryColor,
               borderRadius:
                   BorderRadius.circular(12.0), // Adjust the radius as needed
             ),
@@ -36,6 +36,7 @@ class ArticleWidget extends StatelessWidget {
                 start: 20, end: 20, bottom: 25, top: 25),
             height: MediaQuery.of(context).size.width / 1.9,
             child: Scaffold(
+              backgroundColor: Theme.of(context).primaryColor,
               body: Row(
                 children: [
                   Expanded(
@@ -54,7 +55,7 @@ class ArticleWidget extends StatelessWidget {
                                   fontWeight: FontWeight.bold, fontSize: 14),
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           Flexible(
                             child: Text(
                               "Time : " + article.publishedAt,
@@ -112,7 +113,7 @@ class ArticleWidget extends StatelessWidget {
                 child: Container(
                   width: MediaQuery.of(context).size.width / 3,
                   height: double.maxFinite,
-                  child: Icon(Icons.image),
+                  child: const Icon(Icons.image),
                   decoration: BoxDecoration(
                     color: Colors.deepPurple.withOpacity(0.1),
                   ),
